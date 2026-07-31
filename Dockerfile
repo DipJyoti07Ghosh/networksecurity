@@ -2,12 +2,10 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Prevent interactive prompts during apt operations
 ENV DEBIAN_FRONTEND=noninteractive
 
 COPY . /app
 
-# Consolidated system dependency installation
 RUN apt-get update && apt-get install -y --no-install-recommends \
     awscli \
     && rm -rf /var/lib/apt/lists/*
