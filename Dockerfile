@@ -2,12 +2,12 @@ FROM python:3.10-slim
 
 WORKDIR /app
 
-# Set non-interactive mode to prevent debconf/tzdata prompts from breaking the build
+# Prevent interactive prompts during apt operations
 ENV DEBIAN_FRONTEND=noninteractive
 
 COPY . /app
 
-# Combine update, install, and cache cleanup into a single layer
+# Consolidated system dependency installation
 RUN apt-get update && apt-get install -y --no-install-recommends \
     awscli \
     && rm -rf /var/lib/apt/lists/*
